@@ -1,0 +1,28 @@
+{
+  "name": "hyperpipe",
+  "version": "0.0.0",
+  "description": "Distributed input/output pipe.",
+  "main": "index.js",
+  "dependencies": {
+    "hypercore": "^4.11.0",
+    "hyperdrive-archive-swarm": "^4.1.6",
+    "level": "^1.5.0",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "standard": "^8.5.0"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/hyperpipe.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/hyperpipe/issues"
+  },
+  "homepage": "https://github.com/mafintosh/hyperpipe"
+}
