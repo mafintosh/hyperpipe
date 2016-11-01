@@ -4,6 +4,7 @@ var hypercore = require('hypercore')
 var swarm = require('hyperdrive-archive-swarm')
 var level = require('level')
 var minimist = require('minimist')
+var mkdirp = require('mkdirp')
 
 var argv = minimist(process.argv.slice(2), {
   alias: {help: 'h', tail: 't'},
@@ -15,6 +16,8 @@ if (!argv._[0] || argv.h) {
   console.error('Usage: hyperpipe [dir] [key?]')
   process.exit(1)
 }
+
+mkdirp.sync(argv._[0])
 
 var core = hypercore(level(argv._[0]))
 var key = argv._[1]
