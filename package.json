@@ -15,6 +15,9 @@
   "scripts": {
     "test": "standard"
   },
+  "bin": {
+    "hyperpipe": "./index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mafintosh/hyperpipe.git"
