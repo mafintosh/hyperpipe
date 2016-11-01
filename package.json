@@ -1,6 +1,6 @@
 {
   "name": "hyperpipe",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Distributed input/output pipe.",
   "main": "index.js",
   "dependencies": {
