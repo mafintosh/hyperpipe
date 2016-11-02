@@ -5,15 +5,17 @@ var swarm = require('hyperdrive-archive-swarm')
 var level = require('level')
 var minimist = require('minimist')
 var mkdirp = require('mkdirp')
+var path = require('path')
+var fs = require('fs')
 
 var argv = minimist(process.argv.slice(2), {
   alias: {help: 'h', tail: 't'},
-  boolean: ['help', 'tail'],
-  default: {live: true}
+  boolean: ['help', 'tail', 'no-live'],
+  default: {'no-live': false}
 })
 
 if (!argv._[0] || argv.h) {
-  console.error('Usage: hyperpipe [dir] [key?]')
+  console.error(fs.readFileSync(path.join(__dirname, 'usage.txt'), 'utf8'))
   process.exit(1)
 }
 
@@ -38,7 +40,11 @@ function onkey (key) {
     if (err) throw err
 
     if (!feed.secretKey) {
-      feed.createReadStream({live: argv.live, start: argv.tail ? feed.blocks : 0}).on('end', onend).pipe(process.stdout)
+      const opts = {
+        live: !argv['no-live'],
+        start: argv.tail ? feed.blocks : 0
+      }
+      feed.createReadStream(opts).on('end', onend).pipe(process.stdout)
     } else {
       console.error(feed.key.toString('hex'))
       process.stdin.pipe(feed.createWriteStream())

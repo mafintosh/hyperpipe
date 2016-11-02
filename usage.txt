@@ -1,29 +1,3 @@
-# hyperpipe
-
-Distributed input/output pipe.
-
-``` sh
-npm install -g hyperpipe
-hyperpipe --help
-```
-
-## Usage
-
-On one computer
-
-``` sh
-./program | hyperpipe /tmp/some-folder
-<prints-key>
-```
-
-On another
-
-``` sh
-hyperpipe /tmp/some-other-folder <key-from-above>
-```
-
-## API
-```sh
   Usage:
     $ hyperpipe <database> <key?> [options]
 
@@ -39,8 +13,3 @@ hyperpipe /tmp/some-other-folder <key-from-above>
     $ hyperpipe ./pipe.db < README.md         # cat a file & print key
     $ hyperpipe ./pipe.db <key> > README.md   # write a file from a key
     $ tail -F foo.log | hyperpipe ./pipe.db   # tail a live log file
-```
-
-## License
-
-MIT
