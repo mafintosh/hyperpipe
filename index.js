@@ -8,14 +8,20 @@ var mkdirp = require('mkdirp')
 var path = require('path')
 var fs = require('fs')
 
+var usage = fs.readFileSync(path.join(__dirname, 'usage.txt'), 'utf8')
 var argv = minimist(process.argv.slice(2), {
   alias: {help: 'h', tail: 't'},
   boolean: ['help', 'tail', 'no-live'],
   default: {'no-live': false}
 })
 
-if (!argv._[0] || argv.h) {
-  console.error(fs.readFileSync(path.join(__dirname, 'usage.txt'), 'utf8'))
+if (argv.help) {
+  console.log(usage)
+  process.exit()
+}
+
+if (!argv._[0]) {
+  console.error(usage)
   process.exit(1)
 }
 
