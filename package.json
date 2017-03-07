@@ -4,9 +4,8 @@
   "description": "Distributed input/output pipe.",
   "main": "index.js",
   "dependencies": {
-    "hypercore": "^4.11.0",
-    "hyperdrive-archive-swarm": "^4.1.6",
-    "level": "^1.5.0",
+    "hypercore": "^5.2.1",
+    "hyperdiscovery": "^1.1.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1"
   },

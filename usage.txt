@@ -1,5 +1,5 @@
   Usage:
-    $ hyperpipe <database> <key?> [options]
+    $ hyperpipe <dir> <key?> [options]
 
   Commands:
     <default>    Pipe a file into the swarm or read from the swarm at a key
@@ -10,6 +10,6 @@
           --no-live   Exit after hyperpipe is done syncing
 
   Examples:
-    $ hyperpipe ./pipe.db < README.md         # cat a file & print key
-    $ hyperpipe ./pipe.db <key> > README.md   # write a file from a key
-    $ tail -F foo.log | hyperpipe ./pipe.db   # tail a live log file
+    $ hyperpipe ./my-pipe < README.md         # cat a file & print key
+    $ hyperpipe ./my-pipe <key> > README.md   # write a file from a key
+    $ tail -F foo.log | hyperpipe ./my-pipe   # tail a live log file

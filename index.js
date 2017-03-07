@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 var hypercore = require('hypercore')
-var swarm = require('hyperdrive-archive-swarm')
-var level = require('level')
+var swarm = require('hyperdiscovery')
 var minimist = require('minimist')
 var mkdirp = require('mkdirp')
 var path = require('path')
@@ -27,40 +26,26 @@ if (!argv._[0]) {
 
 mkdirp.sync(argv._[0])
 
-var core = hypercore(level(argv._[0]))
 var key = argv._[1]
+var feed = hypercore(argv._[0], key)
 
-if (key) {
-  onkey(key)
-} else {
-  core.list(function (err, keys) {
-    if (err) throw err
-    onkey(keys[0])
-  })
-}
-
-function onkey (key) {
-  var feed = core.createFeed(key)
-
-  feed.open(function (err) {
-    if (err) throw err
-
-    if (!feed.secretKey) {
-      const opts = {
-        live: !argv['no-live'],
-        start: argv.tail ? feed.blocks : 0
-      }
-      feed.createReadStream(opts).on('end', onend).pipe(process.stdout)
-    } else {
-      console.error(feed.key.toString('hex'))
-      process.stdin.pipe(feed.createWriteStream())
+feed.ready(function () {
+  if (!feed.writable) {
+    const opts = {
+      live: !argv['no-live'],
+      start: argv.tail ? feed.blocks : 0
     }
-  })
+    feed.createReadStream(opts).on('end', onend).pipe(process.stdout)
+  } else {
+    console.error(feed.key.toString('hex'))
+    process.stdin.pipe(feed.createWriteStream())
+  }
 
   var sw = swarm(feed)
 
   function onend () {
     sw.close()
   }
-}
+})
+
 
