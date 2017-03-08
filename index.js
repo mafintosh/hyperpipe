@@ -29,7 +29,7 @@ mkdirp.sync(argv._[0])
 var key = argv._[1]
 var feed = hypercore(argv._[0], key)
 
-feed.ready(function () {
+feed.on('ready', function () {
   if (!feed.writable) {
     const opts = {
       live: !argv['no-live'],
