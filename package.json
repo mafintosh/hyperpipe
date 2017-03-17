@@ -4,7 +4,7 @@
   "description": "Distributed input/output pipe.",
   "main": "index.js",
   "dependencies": {
-    "hypercore": "^5.2.1",
+    "hypercore": "^5.4.0",
     "hyperdiscovery": "^1.1.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1"
