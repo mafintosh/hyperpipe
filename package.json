@@ -7,7 +7,8 @@
     "hypercore": "^6.0.0",
     "hyperdiscovery": "^1.1.0",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "ndjson": "^1.5.0"
   },
   "devDependencies": {
     "standard": "^8.5.0"

@@ -5,11 +5,12 @@ var swarm = require('hyperdiscovery')
 var minimist = require('minimist')
 var mkdirp = require('mkdirp')
 var path = require('path')
+var ndjson = require('ndjson')
 var fs = require('fs')
 
 var usage = fs.readFileSync(path.join(__dirname, 'usage.txt'), 'utf8')
 var argv = minimist(process.argv.slice(2), {
-  alias: {help: 'h', tail: 't'},
+  alias: {help: 'h', tail: 't', encoding: 'e'},
   boolean: ['help', 'tail', 'no-live'],
   default: {'no-live': false}
 })
@@ -27,7 +28,7 @@ if (!argv._[0]) {
 mkdirp.sync(argv._[0])
 
 var key = argv._[1]
-var feed = hypercore(argv._[0], key)
+var feed = hypercore(argv._[0], key, {valueEncoding: argv.encoding})
 
 feed.on('ready', function () {
   if (!feed.writable) {
@@ -38,7 +39,11 @@ feed.on('ready', function () {
     feed.createReadStream(opts).on('end', onend).pipe(process.stdout)
   } else {
     console.error(feed.key.toString('hex'))
-    process.stdin.pipe(feed.createWriteStream())
+    if (argv.encoding === 'json') {
+      process.stdin.pipe(ndjson.parse()).pipe(feed.createWriteStream())
+    } else {
+      process.stdin.pipe(feed.createWriteStream())
+    }
   }
 
   var sw = swarm(feed)
@@ -47,5 +52,3 @@ feed.on('ready', function () {
     sw.close()
   }
 })
-
-
