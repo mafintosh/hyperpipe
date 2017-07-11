@@ -7,9 +7,11 @@
     Options:
       -h, --help      Print usage
       -t, --tail      Only print get updates
+      -e, --encoding  Set encoding for hypercore (parse ndjson by setting to 'json')
           --no-live   Exit after hyperpipe is done syncing
 
   Examples:
     $ hyperpipe ./my-pipe < README.md         # cat a file & print key
     $ hyperpipe ./my-pipe <key> > README.md   # write a file from a key
     $ tail -F foo.log | hyperpipe ./my-pipe   # tail a live log file
+    $ hyperpipe ./my-pipe --encoding='json' < my-data.json   # put ndjson into hypercore
