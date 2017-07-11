@@ -33,12 +33,14 @@ hyperpipe /tmp/some-other-folder <key-from-above>
     Options:
       -h, --help      Print usage
       -t, --tail      Only print get updates
+      -e, --encoding  Set encoding for hypercore (parse ndjson by setting to 'json')
           --no-live   Exit after hyperpipe is done syncing
 
   Examples:
     $ hyperpipe ./pipe.db < README.md         # cat a file & print key
     $ hyperpipe ./pipe.db <key> > README.md   # write a file from a key
     $ tail -F foo.log | hyperpipe ./pipe.db   # tail a live log file
+    $ hyperpipe ./pipe.db --encoding='json' < my-data.json   # put ndjson into hypercore
 ```
 
 ## License
